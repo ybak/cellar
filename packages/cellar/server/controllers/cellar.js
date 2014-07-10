@@ -4,8 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    Wine = mongoose.model('Wine'),
-    _ = require('lodash');
+    Wine = mongoose.model('Wine');
 
 exports.findAll = function(req, res) {
     Wine.find(function(err, docs) {
