@@ -1,26 +1,22 @@
 'use strict';
 
+var cellar = require('../controllers/cellar');
+
 // The Package is past automatically as first parameter
-module.exports = function(Cellar, app, auth, database) {
+module.exports = function (Cellar, app, auth, database) {
 
-    app.get('/cellar/example/anyone', function(req, res, next) {
-        res.send('Anyone can access this');
-    });
+    app.route('/api/wines').get(cellar.findAll).put(cellar.updateWine).post(cellar.create);
 
-    app.get('/cellar/example/auth', auth.requiresLogin, function(req, res, next) {
-        res.send('Only authenticated users can access this');
-    });
+    app.route('/api/wines/:id').get(cellar.findById).delete(cellar.deleteWine);
 
-    app.get('/cellar/example/admin', auth.requiresAdmin, function(req, res, next) {
-        res.send('Only users with Admin role can access this');
-    });
-
-    app.get('/cellar/example/render', function(req, res, next) {
-        Cellar.render('index', {
-            package: 'cellar'
-        }, function(err, html) {
-            //Rendering a view from the Package server/views
-            res.send(html);
-        });
-    });
 };
+
+
+//app.get('/api/wines', wines.findAll);
+//app.get('/api/wines/:id', wines.findById);
+//app.put('/api/wines', wines.updateWine);
+//app.delete('/api/wines/:id', wines.deleteWine);
+//app.post('/api/wines', wines.create);
+//app.get('/home/*',  function(req, res){
+//    res.sendfile(__dirname+'/public/index.html');
+//});
