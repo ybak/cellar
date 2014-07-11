@@ -23,6 +23,7 @@ System.register(function(app, auth, database) {
     // The middleware in config/express will run before this code
 
     // Set views path, template engine and default layout
+    //http://paularmstrong.github.io/swig/docs/#express
     app.set('views', __dirname + '/server/views');
 
     // Setting the favicon and static folder

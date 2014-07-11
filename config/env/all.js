@@ -8,6 +8,7 @@ module.exports = {
     port: process.env.PORT || 3000,
     hostname: process.env.HOST || process.env.HOSTNAME,
     db: process.env.MONGOHQ_URL,
+    //swig express http://paularmstrong.github.io/swig/docs/#express
     templateEngine: 'swig',
 
     // The secret should be set to a non-guessable string that
