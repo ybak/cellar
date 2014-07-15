@@ -17,11 +17,24 @@ Cellar.register(function(app, auth, database) {
     Cellar.routes(app, auth, database);
 
     //We are adding a link to the main menu for all authenticated users
+//    Cellar.menus.add({
+//        title: 'cellar',
+//        link: 'cellar home',
+//        roles: ['anonymous'],
+//        menu: 'main'
+//    });
+
     Cellar.menus.add({
-        title: 'cellar example page',
-        link: 'cellar example page',
-        roles: ['authenticated'],
-        menu: 'main'
+        'roles': ['anonymous'],
+        'title': 'Browse Wines',
+        'link': 'browse wines'
+    });
+
+
+    Cellar.menus.add({
+        'roles': ['anonymous'],
+        'title': 'Add Wines',
+        'link': 'add wines'
     });
 
     /**
