@@ -2,7 +2,7 @@
 
 angular.module('mean.cellar').config(['$stateProvider',
     function($stateProvider) {
-        $stateProvider.state('browse wines', {
+            $stateProvider.state('browse wines', {
             url: '/cellar/browse',
             templateUrl: 'cellar/views/index.html'
         });

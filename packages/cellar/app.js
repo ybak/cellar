@@ -59,5 +59,8 @@ Cellar.register(function(app, auth, database) {
     });
     */
 
+    Cellar.aggregateAsset('css', 'cellar.css');
+
+
     return Cellar;
 });
