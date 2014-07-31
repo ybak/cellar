@@ -1,79 +1,14 @@
-<div class="" data-ng-controller="CellarController">
-
+<div class="" data-ng-controller="CellarController" data-ng-init="find()">
     <div class="row-fluid">
         <div id="content" class="span12&gt;">
             <div>
                 <div class="row">
-                    <div class="col-xs-4">
-                        <a href="/home/wines/506df6b6849a990200000012" class="thumbnail plain"
-                           style="text-align: center;">
-                            <img src="/cellar/assets/pics/hugel.jpg" height="150" width="125" alt="">
-                            <h5>HUGEL</h5>
-                            2010 Pinot Gris<br>
-                            <i class="icon-globe"></i> Alsace, France
-                        </a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/home/wines/506df6b6849a990200000010" class="thumbnail plain"
-                           style="text-align: center;">
-                            <img src="/cellar/assets/pics/shafer.jpg" height="150" width="125" alt="">
-                            <h5>SHAFER RED SHOULDER RANCH</h5>
-                            2009 3333<br>
-                            <i class="icon-globe"></i> California, USA
-                        </a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/home/wines/506df6b6849a990200000004" class="thumbnail plain"
-                           style="text-align: center;">
-                            <img src="/cellar/assets/pics/ex_umbris.jpg" height="150" width="125" alt="">
-                            <h5>OWEN ROE "EX UMBRIS"</h5>
-                            2009 Syrah<br>
-                            <i class="icon-globe"></i> Washington, USA
-                        </a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/home/wines/506df6b6849a990200000015" class="thumbnail plain"
-                           style="text-align: center;">
-                            <img src="/cellar/assets/pics/calera.jpg" height="150" width="125" alt="">
-                            <h5>CALERA 35TH ANNIVERSARY</h5>
-                            2010 Pinot Noir<br>
-                            <i class="icon-globe"></i> California, USA
-                        </a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/home/wines/506df6b6849a990200000009" class="thumbnail plain"
-                           style="text-align: center;">
-                            <img src="/cellar/assets/pics/block_nine.jpg" height="150" width="125" alt="">
-                            <h5>BLOCK NINE</h5>
-                            2009 Pinot Noir<br>
-                            <i class="icon-globe"></i> California, USA
-                        </a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/home/wines/506df6b6849a990200000017" class="thumbnail plain"
-                           style="text-align: center;">
-                            <img src="/cellar/assets/pics/momo.jpg" height="150" width="125" alt="">
-                            <h5>MOMO MARLBOROUGH</h5>
-                            2010 Sauvignon Blanc<br>
-                            <i class="icon-globe"></i> South Island, New Zealand
-                        </a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/home/wines/506df6b6849a99020000000e" class="thumbnail plain"
-                           style="text-align: center;">
-                            <img src="/cellar/assets/pics/dinastia.jpg" height="150" width="125" alt="">
-                            <h5>DINASTIA VIVANCO </h5>
-                            2008 Tempranillo<br>
-                            <i class="icon-globe"></i> Rioja, Spain
-                        </a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/home/wines/506df6b6849a99020000000a" class="thumbnail plain"
-                           style="text-align: center;">
-                            <img src="/cellar/assets/pics/domaine_serene.jpg" height="150" width="125" alt="">
-                            <h5>DOMAINE SERENE</h5>
-                            2007 Pinot Noir<br>
-                            <i class="icon-globe"></i> Oregon, USA
+                    <div class="col-xs-3" data-ng-repeat="wine in wines">
+                        <a href="/home/wines/{{wine.id}}" class="thumbnail plain" style="text-align: center;">
+                            <img src="/cellar/assets/pics/{{wine.picture}}" height="150" width="125" alt="">
+                            <h5>{{wine.name}}</h5>
+                            {{wine.year}} {{wine.grapes}}<br>
+                            <i class="icon-globe"></i> {{wine.region}}, {{wine.country}}
                         </a>
                     </div>
                 </div>
@@ -92,3 +27,4 @@
     </div>
 
 </div>
+

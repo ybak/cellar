@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
     S = require('string'),
     _ = require('underscore');
 var Module = require('meanio').Module;
+
 var Cellar = new Module('cellar');
 
 
