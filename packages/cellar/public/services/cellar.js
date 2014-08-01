@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('mean.cellar').factory('Cellar', ['$resource',
-    function($resource) {
+    function ($resource) {
         return $resource('/api/wines/:articleId', {
             articleId: '@_id'
+        }, {
+            query: {
+                method: 'GET',
+                isArray : false
+            }
         }, {
             update: {
                 method: 'PUT'

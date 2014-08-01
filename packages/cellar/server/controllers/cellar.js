@@ -7,21 +7,15 @@ var mongoose = require('mongoose'),
     Wine = mongoose.model('Wine');
 
 exports.findAll = function (req, res) {
-    Wine.find(function (err, docs) {
-        res.send(docs);
-    });
-};
-
-exports.findByPage = function (req, res) {
-    var page = req.params.page || 1,
-        limit = req.params.limit || 8;
+    var page = req.query.page || 1,
+        limit = req.query.limit || 8;
 
     //Todo not scale
     Wine.paginate({}, page, limit, function(error, pageCount, paginatedResults, itemCount) {
         if (error) {
             res.send(error);
         } else {
-            res.send({page: page, limit: limit, pageCount : pageCount, items: paginatedResults});
+            res.send({page: page, limit: limit, itemCount : itemCount, items: paginatedResults});
         }
     });
 };
