@@ -9,6 +9,7 @@ module.exports = function (Cellar, app, auth, database) {
 
     app.route('/api/wines/:id').get(cellar.findById).delete(cellar.deleteWine);
 
+    app.route('/api/wines/:page/:limit').get(cellar.findByPage);
 };
 
 

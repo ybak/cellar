@@ -6,15 +6,29 @@
 var mongoose = require('mongoose'),
     Wine = mongoose.model('Wine');
 
-exports.findAll = function(req, res) {
-    Wine.find(function(err, docs) {
+exports.findAll = function (req, res) {
+    Wine.find(function (err, docs) {
         res.send(docs);
     });
 };
 
-exports.findById = function(req, res) {
+exports.findByPage = function (req, res) {
+    var page = req.params.page || 1,
+        limit = req.params.limit || 8;
+
+    //Todo not scale
+    Wine.paginate({}, page, limit, function(error, pageCount, paginatedResults, itemCount) {
+        if (error) {
+            res.send(error);
+        } else {
+            res.send({page: page, limit: limit, pageCount : pageCount, items: paginatedResults});
+        }
+    });
+};
+
+exports.findById = function (req, res) {
     var id = req.params.id;
-    Wine.findById(id, function(err, wine){
+    Wine.findById(id, function (err, wine) {
         res.send(wine);
     });
 };
@@ -37,12 +51,12 @@ exports.deleteWine = function (req, res) {
     });
 };
 
-exports.create = function(req, res) {
+exports.create = function (req, res) {
     var newWine = req.body;
     delete newWine._id;
     console.log('Adding wine: ' + JSON.stringify(newWine));
-    Wine.create(newWine, function(err, doc) {
-        console.log('wine added.'+ JSON.stringify(doc));
+    Wine.create(newWine, function (err, doc) {
+        console.log('wine added.' + JSON.stringify(doc));
         res.send(doc);
     });
 };

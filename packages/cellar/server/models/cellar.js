@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+    mongoosePaginate = require('mongoose-paginate'),
     Schema = mongoose.Schema;
 
 
@@ -58,4 +59,7 @@ WineSchema.statics.load = function (id, cb) {
     }, cb);
 };
 
+WineSchema.plugin(mongoosePaginate);
+
 mongoose.model('Wine', WineSchema);
+
