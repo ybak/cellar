@@ -4,7 +4,7 @@
             <div>
                 <div class="row">
                     <div class="col-xs-3" data-ng-repeat="wine in wines.items">
-                        <a href="/home/wines/{{wine.id}}" class="thumbnail plain" style="text-align: center;">
+                        <a data-ng-href="#!/cellar/{{wine._id}}/edit" class="thumbnail plain" style="text-align: center;">
                             <img src="/cellar/assets/pics/{{wine.picture}}" height="150" width="125" alt="">
                             <h5>{{wine.name}}</h5>
                             {{wine.year}} {{wine.grapes}}<br>
@@ -14,15 +14,6 @@
                 </div>
                 <div class="text-center">
                     <pagination total-items="wines.itemCount" ng-model="wines.page" ng-change="pageChanged()"></pagination>
-
-                    <!--<ul class="pagination">-->
-                        <!--<li class="active"><a href="/home/wines/page/1">1</a></li>-->
-                        <!--<li><a href="/home/wines/page/2">2</a></li>-->
-                        <!--<li><a href="/home/wines/page/3">3</a></li>-->
-                        <!--<li><a href="/home/wines/page/4">4</a></li>-->
-                        <!--<li><a href="/home/wines/page/5">5</a></li>-->
-                        <!--<li><a href="/home/wines/page/6">6</a></li>-->
-                    <!--</ul>-->
                 </div>
             </div>
         </div>

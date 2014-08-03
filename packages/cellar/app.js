@@ -7,7 +7,6 @@ var mongoose = require('mongoose'),
     S = require('string'),
     _ = require('underscore');
 var Module = require('meanio').Module;
-
 var Cellar = new Module('cellar');
 
 
@@ -20,9 +19,51 @@ Cellar.register(function(app, auth, database) {
     //We enable routing. By default the Package Object is passed to the routes
     Cellar.routes(app, auth, database);
 
-    /*--------------------------------------------------------------------------------------------------------------------*/
-// Populate database with sample data -- Only used once: the first time the application is started.
-// You'd typically not find this code in a real-life app, since the database would already exist.
+    //We are adding a link to the main menu for all authenticated users
+//    Cellar.menus.add({
+//        title: 'cellar',
+//        link: 'cellar home',
+//        roles: ['anonymous'],
+//        menu: 'main'
+//    });
+
+    Cellar.menus.add({
+        'roles': ['anonymous'],
+        'title': 'Browse Wines',
+        'link': 'browse wines'
+    });
+
+
+    Cellar.menus.add({
+        'roles': ['anonymous'],
+        'title': 'Add Wines',
+        'link': 'add wines'
+    });
+
+    /**
+    //Uncomment to use. Requires meanio@0.3.7 or above
+    // Save settings with callback
+    // Use this for saving data from administration pages
+    Cellar.settings({
+        'someSetting': 'some value'
+    }, function(err, settings) {
+        //you now have the settings object
+    });
+
+    // Another save settings example this time with no callback
+    // This writes over the last settings.
+    Cellar.settings({
+        'anotherSettings': 'some value'
+    });
+
+    // Get settings. Retrieves latest saved settigns
+    Cellar.settings(function(err, settings) {
+        //you now have the settings object
+    });
+    */
+
+    Cellar.aggregateAsset('css', 'cellar.css');
+
     var populateDB = function(db) {
 
         var wines = [
@@ -254,51 +295,6 @@ Cellar.register(function(app, auth, database) {
             populateDB(mongoose.connection);
         }
     });
-
-    //We are adding a link to the main menu for all authenticated users
-//    Cellar.menus.add({
-//        title: 'cellar',
-//        link: 'cellar home',
-//        roles: ['anonymous'],
-//        menu: 'main'
-//    });
-
-    Cellar.menus.add({
-        'roles': ['anonymous'],
-        'title': 'Browse Wines',
-        'link': 'browse wines'
-    });
-
-
-    Cellar.menus.add({
-        'roles': ['anonymous'],
-        'title': 'Add Wines',
-        'link': 'add wines'
-    });
-
-    /**
-    //Uncomment to use. Requires meanio@0.3.7 or above
-    // Save settings with callback
-    // Use this for saving data from administration pages
-    Cellar.settings({
-        'someSetting': 'some value'
-    }, function(err, settings) {
-        //you now have the settings object
-    });
-
-    // Another save settings example this time with no callback
-    // This writes over the last settings.
-    Cellar.settings({
-        'anotherSettings': 'some value'
-    });
-
-    // Get settings. Retrieves latest saved settigns
-    Cellar.settings(function(err, settings) {
-        //you now have the settings object
-    });
-    */
-
-    Cellar.aggregateAsset('css', 'cellar.css');
 
     return Cellar;
 });

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.cellar').controller('CellarController', ['$scope',  'Global', 'Cellar',
-    function ($scope, Global, Cellar) {
+angular.module('mean.cellar').controller('CellarController', ['$scope', '$stateParams', 'Global', 'Cellar',
+    function ($scope, $stateParams, Global, Cellar) {
         $scope.global = Global;
         $scope.package = {
             name: 'cellar'
@@ -16,6 +16,14 @@ angular.module('mean.cellar').controller('CellarController', ['$scope',  'Global
         $scope.paging = function (page, limit) {
             Cellar.query({page: page, limit: limit }, function (wines) {
                 $scope.wines = wines;
+            });
+        };
+
+        $scope.findOne = function () {
+            Cellar.get({
+                wineId: $stateParams.wineId
+            }, function (wine) {
+                $scope.wine = wine;
             });
         };
 
