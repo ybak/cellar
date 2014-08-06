@@ -5,9 +5,9 @@ var cellar = require('../controllers/cellar');
 // The Package is past automatically as first parameter
 module.exports = function (Cellar, app, auth, database) {
 
-    app.route('/api/wines').get(cellar.findAll).put(cellar.updateWine).post(cellar.create);
+    app.route('/api/wines').get(cellar.findAll).post(cellar.create);
 
-    app.route('/api/wines/:id').get(cellar.findById).delete(cellar.deleteWine);
+    app.route('/api/wines/:id').get(cellar.findById).put(cellar.updateWine).delete(cellar.deleteWine);
 
 };
 

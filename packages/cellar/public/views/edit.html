@@ -1,44 +1,37 @@
 <div class="row-fluid" data-ng-controller="CellarController" data-ng-init="findOne()">
-    <form class="form-horizontal span12">
+    <form name="wineForm" class="form-horizontal span12" data-ng-submit="update(wineForm.$valid)">
         <legend>Wine Details</legend>
         <br/>
 
         <div class="row">
-            <div class="col-lg-2"/>
-            <div class="col-lg-5">
-                <div class="input-group">
-                    <span class="input-group-addon">Id:</span>
-                    <input type="text" class="form-control" name="id" value="{{wine._id}}" disabled>
-                </div>
-                <br>
-
+            <div class="col-lg-5 col-lg-offset-2">
                 <div class="input-group">
                     <span class="input-group-addon">Name:</span>
-                    <input type="text" class="form-control" name="name" value="{{wine.name}}">
+                    <input type="text" class="form-control" name="name" data-ng-model="wine.name">
                 </div>
                 <br>
 
                 <div class="input-group">
                     <span class="input-group-addon">Grapes:</span>
-                    <input type="text" class="form-control" name="grapes" value="{{wine.grapes}}">
+                    <input type="text" class="form-control" name="grapes" data-ng-model="wine.grapes">
                 </div>
                 <br>
 
                 <div class="input-group">
                     <span class="input-group-addon">Country:</span>
-                    <input type="text" class="form-control" name="country" value="{{wine.country}}">
+                    <input type="text" class="form-control" name="country" data-ng-model="wine.country">
                 </div>
                 <br>
 
                 <div class="input-group">
                     <span class="input-group-addon">Region:</span>
-                    <input type="text" class="form-control" name="region" value="{{wine.region}}">
+                    <input type="text" class="form-control" name="region" data-ng-model="wine.region">
                 </div>
                 <br>
 
                 <div class="input-group">
                     <span class="input-group-addon">Year:</span>
-                    <select class="form-control" name="year" value="{{wine.year}}">
+                    <select class="form-control" name="year" data-ng-model="wine.year">
                         <option>2012</option>
                         <option>2011</option>
                         <option>2010</option>
@@ -51,13 +44,12 @@
 
                 <div class="input-group">
                     <span class="input-group-addon">Notes:</span>
-                    <textarea class="form-control" name="description">
-                    </textarea>
+                    <textarea class="form-control" name="description" data-ng-model="wine.description"></textarea>
                 </div>
                 <br>
             </div>
             <div class="col-lg-3">
-                <div class="well">
+                <div class="well text-center">
                     <p>
                         <img id="picture" width="215" src="/cellar/assets/pics/{{wine.picture}}"/></p>
 
@@ -65,14 +57,17 @@
                         box above.</p>
                 </div>
             </div>
-            <div class="col-lg-2"/>
         </div>
         <div class="row">
-            <div class="text-center">
+            <div class="text-center well col-lg-8 col-lg-offset-2" >
                 <button type="submit" class="btn btn-primary">Save</button>
-                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="submit" class="btn btn-default">Delete</button>
             </div>
         </div>
+        <div class="row">
+            <alert class="col-lg-8 col-lg-offset-2" ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
+        </div>
+
     </form>
 </div>
 

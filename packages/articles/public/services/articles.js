@@ -9,6 +9,6 @@ angular.module('mean.articles').factory('Articles', ['$resource',
 			update: {
 				method: 'PUT'
 			}
-		});
+		})  ;
 	}
 ]);

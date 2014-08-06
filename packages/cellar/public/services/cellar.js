@@ -7,9 +7,8 @@ angular.module('mean.cellar').factory('Cellar', ['$resource',
         }, {
             query: {
                 method: 'GET',
-                isArray : false
-            }
-        }, {
+                isArray: false
+            },
             update: {
                 method: 'PUT'
             }

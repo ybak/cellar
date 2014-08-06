@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.cellar').controller('CellarController', ['$scope', '$stateParams', 'Global', 'Cellar',
-    function ($scope, $stateParams, Global, Cellar) {
+angular.module('mean.cellar').controller('CellarController', ['$scope', '$location', '$stateParams', 'Global', 'Cellar',
+    function ($scope, $location, $stateParams, Global, Cellar) {
         $scope.global = Global;
         $scope.package = {
             name: 'cellar'
@@ -25,6 +25,20 @@ angular.module('mean.cellar').controller('CellarController', ['$scope', '$stateP
             }, function (wine) {
                 $scope.wine = wine;
             });
+        };
+
+        $scope.update = function (isValid) {
+            if (isValid) {
+                var wine = $scope.wine;
+
+                wine.$update(function () {
+                    $scope.alerts = [
+                        { type: 'success', msg: 'Success! Wine saved successfully' }
+                    ];
+                });
+            } else {
+                $scope.submitted = true;
+            }
         };
 
     }
