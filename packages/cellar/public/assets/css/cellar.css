@@ -54,3 +54,9 @@ h5 {
     min-width: 260px;
 }
 
+.view-cellar textarea {
+    height: 100px;
+    min-height: 100px;
+    max-height: 100px;
+}
+
