@@ -27,6 +27,24 @@ angular.module('mean.cellar').controller('CellarController', ['$scope', '$locati
             });
         };
 
+        $scope.delete = function (wine) {
+            //todo unimplement
+        };
+
+        $scope.create = function (isValid) {
+            if (isValid) {
+                var wine = $scope.wine;
+
+                wine.$save(function () {
+                    $scope.alerts = [
+                        { type: 'success', msg: 'Success! Wine saved successfully' }
+                    ];
+                });
+            } else {
+                $scope.submitted = true;
+            }
+        };
+
         $scope.update = function (isValid) {
             if (isValid) {
                 var wine = $scope.wine;

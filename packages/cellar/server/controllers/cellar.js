@@ -11,11 +11,11 @@ exports.findAll = function (req, res) {
         limit = req.query.limit || 8;
 
     //Todo not scale
-    Wine.paginate({}, page, limit, function(error, pageCount, paginatedResults, itemCount) {
+    Wine.paginate({}, page, limit, function (error, pageCount, paginatedResults, itemCount) {
         if (error) {
             res.send(error);
         } else {
-            res.send({page: page, limit: limit, itemCount : itemCount, items: paginatedResults});
+            res.send({page: page, pageCount: pageCount, limit: limit, itemCount: itemCount, items: paginatedResults});
         }
     });
 };
