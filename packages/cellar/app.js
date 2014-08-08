@@ -27,7 +27,7 @@ Cellar.register(function(app, auth, database) {
 //        menu: 'main'
 //    });
 
-    Cellar.angularDependencies(['underscore','ui.bootstrap']);
+    Cellar.angularDependencies(['underscore','ui.bootstrap','mgcrea.ngStrap']);
 
     Cellar.menus.add({
         'roles': ['anonymous'],

@@ -1,7 +1,9 @@
 {
     "core": {
         "css": {
-            "bower_components/build/css/dist.min.css": []
+            "bower_components/build/css/dist.min.css": [
+                "bower_components/angular-motion/dist/angular-motion.css"
+            ]
         },
         "js": {
             "bower_components/build/js/dist.min.js": [
@@ -9,6 +11,9 @@
                 "bower_components/underscore/underscore.js",
                 "bower_components/bootstrap/dist/js/bootstrap.js",
                 "bower_components/angular/angular.js",
+                "bower_components/angular-animate/angular-animate.js",
+                "bower_components/angular-strap/dist/angular-strap.js",
+                "bower_components/angular-strap/dist/angular-strap.tpl.js",
                 "bower_components/angular-mocks/angular-mocks.js",
                 "bower_components/angular-cookies/angular-cookies.js",
                 "bower_components/angular-resource/angular-resource.js",
