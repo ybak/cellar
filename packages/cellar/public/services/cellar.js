@@ -14,4 +14,27 @@ angular.module('mean.cellar').factory('Cellar', ['$resource',
             }
         });
     }
-]);
+]).config(function ($modalProvider) {
+    angular.extend($modalProvider.defaults, {
+        html: true
+    });
+}).service('$confirm', function ($modal, $rootScope, $q) {
+    var scope = $rootScope.$new();
+    var deferred;
+    scope.title = 'confirm';
+    scope.content = 'Confirm deletion?';
+    scope.answer = function (res) {
+        deferred.resolve(res);
+        confirm.hide();
+    };
+
+    var confirm = $modal({template: 'cellar/views/confirm.tpl.html', scope: scope, show: false});
+    var parentShow = confirm.show;
+    confirm.show = function () {
+        deferred = $q.defer();
+        parentShow();
+        return deferred.promise;
+    };
+
+    return confirm;
+});

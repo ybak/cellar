@@ -14,7 +14,7 @@ var Cellar = new Module('cellar');
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-Cellar.register(function(app, auth, database) {
+Cellar.register(function (app, auth, database) {
 
     //We enable routing. By default the Package Object is passed to the routes
     Cellar.routes(app, auth, database);
@@ -27,7 +27,7 @@ Cellar.register(function(app, auth, database) {
 //        menu: 'main'
 //    });
 
-    Cellar.angularDependencies(['underscore','ui.bootstrap','mgcrea.ngStrap']);
+    Cellar.angularDependencies(['underscore', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'mgcrea.ngStrap']);
 
     Cellar.menus.add({
         'roles': ['anonymous'],
@@ -43,30 +43,30 @@ Cellar.register(function(app, auth, database) {
     });
 
     /**
-    //Uncomment to use. Requires meanio@0.3.7 or above
-    // Save settings with callback
-    // Use this for saving data from administration pages
-    Cellar.settings({
+     //Uncomment to use. Requires meanio@0.3.7 or above
+     // Save settings with callback
+     // Use this for saving data from administration pages
+     Cellar.settings({
         'someSetting': 'some value'
     }, function(err, settings) {
         //you now have the settings object
     });
 
-    // Another save settings example this time with no callback
-    // This writes over the last settings.
-    Cellar.settings({
+     // Another save settings example this time with no callback
+     // This writes over the last settings.
+     Cellar.settings({
         'anotherSettings': 'some value'
     });
 
-    // Get settings. Retrieves latest saved settigns
-    Cellar.settings(function(err, settings) {
+     // Get settings. Retrieves latest saved settigns
+     Cellar.settings(function(err, settings) {
         //you now have the settings object
     });
-    */
+     */
 
     Cellar.aggregateAsset('css', 'cellar.css');
 
-    var populateDB = function(db) {
+    var populateDB = function (db) {
 
         var wines = [
             {
@@ -284,16 +284,17 @@ Cellar.register(function(app, auth, database) {
                 region: 'Washington',
                 description: 'Legend has it the gods didn\'t share their ambrosia with mere mortals.  This merlot may be the closest we\'ve ever come to a taste of heaven.',
                 picture: '/cellar/assets/pics/waterbrook.jpg'
-            }];
+            }
+        ];
 
         database.connection.models.Wine.create(wines);
     };
 
     mongoose.connection.db.collectionNames(function (err, names) {
-        var wineCollection = _.find(names, function(entry){
+        var wineCollection = _.find(names, function (entry) {
             return S(entry.name).endsWith('wines');
         });
-        if(!wineCollection){
+        if (!wineCollection) {
             populateDB(mongoose.connection);
         }
     });
