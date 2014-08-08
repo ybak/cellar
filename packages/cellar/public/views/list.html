@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" data-ng-repeat="wine in wines.items">
                     <a data-ng-href="#!/cellar/{{wine._id}}/edit" class="thumbnail plain" style="text-align: center;">
-                        <img src="/cellar/assets/pics/{{wine.picture}}" height="150" width="125" alt="">
+                        <img ng-src="{{wine.picture}}" height="150" width="125" alt="">
                         <h5>{{wine.name}}</h5>
                         {{wine.year}} {{wine.grapes}}<br>
                         <i class="icon-globe"></i> {{wine.region}}, {{wine.country}}
