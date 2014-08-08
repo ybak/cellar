@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.cellar').controller('CellarController', ['$scope', '$location', '$stateParams', 'Global', 'Cellar',
-    function ($scope, $location, $stateParams, Global, Cellar) {
+angular.module('mean.cellar').controller('CellarController', ['$scope', '$state', '$stateParams', 'Global', 'Cellar',
+    function ($scope, $state, $stateParams, Global, Cellar) {
         $scope.global = Global;
         $scope.package = {
             name: 'cellar'
@@ -27,8 +27,18 @@ angular.module('mean.cellar').controller('CellarController', ['$scope', '$locati
             });
         };
 
-        $scope.delete = function (wine) {
-            //todo unimplement
+        $scope.delete = function ($event) {
+            $event.preventDefault();
+            if ($scope.wine) {
+                $scope.wine.$remove(function (response) {
+                    $scope.alerts = [
+                        { type: 'success', msg: 'Success! Wine delete successfully' }
+                    ];
+                    setTimeout(function(){
+                        $state.go('browse wines');
+                    },1000);
+                });
+            }
         };
 
         $scope.create = function (isValid) {
