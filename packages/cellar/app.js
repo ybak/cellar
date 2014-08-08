@@ -27,6 +27,8 @@ Cellar.register(function(app, auth, database) {
 //        menu: 'main'
 //    });
 
+    Cellar.angularDependencies(['underscore','ui.bootstrap']);
+
     Cellar.menus.add({
         'roles': ['anonymous'],
         'title': 'Browse Wines',

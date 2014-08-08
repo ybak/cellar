@@ -31,13 +31,7 @@
 
                 <div class="input-group">
                     <span class="input-group-addon">Year:</span>
-                    <select class="form-control" name="year" data-ng-model="wine.year">
-                        <option>2012</option>
-                        <option>2011</option>
-                        <option>2010</option>
-                        <option>2009</option>
-                        <option>2008</option>
-                        <option>2007</option>
+                    <select class="form-control" name="year" data-ng-model="wine.year" data-ng-options="year as year for year in years" >
                     </select>
                 </div>
                 <br>

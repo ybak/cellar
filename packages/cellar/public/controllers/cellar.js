@@ -1,11 +1,14 @@
 'use strict';
 
-angular.module('mean.cellar').controller('CellarController', ['$scope', '$state', '$stateParams', 'Global', 'Cellar',
-    function ($scope, $state, $stateParams, Global, Cellar) {
+angular.module('mean.cellar').controller('CellarController', ['$scope', '_','$state', '$stateParams', 'Global', 'Cellar',
+    function ($scope, _, $state, $stateParams, Global, Cellar) {
         $scope.global = Global;
         $scope.package = {
             name: 'cellar'
         };
+
+        $scope.years = [];
+        _.each(_.range(2000, 2014),function(year){$scope.years.push(''+year);});
 
         $scope.pageChanged = function () {
             Cellar.query({page: $scope.wines.page, limit: $scope.wines.limit }, function (wines) {
@@ -71,5 +74,3 @@ angular.module('mean.cellar').controller('CellarController', ['$scope', '$state'
 
     }
 ]);
-
-angular.module('myModule', ['ui.bootstrap']);

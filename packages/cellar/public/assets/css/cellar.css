@@ -1,7 +1,3 @@
-.brand {
-    font-family: 'Arvo';
-}
-
 a.plain:link {
     color: #333;
     text-decoration: none;
@@ -59,4 +55,3 @@ h5 {
     min-height: 100px;
     max-height: 100px;
 }
-
