@@ -48,6 +48,7 @@ exports.deleteWine = function (req, res) {
 exports.create = function (req, res) {
     var newWine = req.body;
     delete newWine._id;
+    newWine.picture = newWine.picture || "/cellar/assets/pics/generic.jpg";
     console.log('Adding wine: ' + JSON.stringify(newWine));
     Wine.create(newWine, function (err, doc) {
         console.log('wine added.' + JSON.stringify(doc));
