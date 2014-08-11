@@ -1,11 +1,14 @@
 {
     "core": {
         "css": {
-            "bower_components/build/css/dist.min.css": []
+            "bower_components/build/css/dist.min.css": [
+                "bower_components/jquery-ui-bootstrap/css/custom-theme/jquery-ui-1.10.3.custom.css"
+            ]
         },
         "js": {
             "bower_components/build/js/dist.min.js": [
                 "bower_components/jquery/dist/jquery.min.js",
+                "bower_components/jquery-ui-bootstrap/assets/js/vendor/jquery-ui-1.10.3.custom.min.js",
                 "bower_components/underscore/underscore.js",
                 "bower_components/bootstrap/dist/js/bootstrap.js",
                 "bower_components/angular/angular.js",

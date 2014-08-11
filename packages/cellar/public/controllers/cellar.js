@@ -30,8 +30,7 @@ angular.module('mean.cellar').controller('CellarController', ['$scope', '_','$st
             });
         };
 
-        $scope.delete = function ($event) {
-            $event.preventDefault();
+        $scope.delete = function () {
             if ($scope.wine) {
                 $scope.wine.$remove(function (response) {
                     $scope.alerts = [
