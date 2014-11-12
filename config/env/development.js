@@ -1,42 +1,24 @@
-'use strict';
+/**
+ * Development environment settings
+ *
+ * This file can include shared settings for a development team,
+ * such as API keys or remote database passwords.  If you're using
+ * a version control solution for your Sails app, this file will
+ * be committed to your repository unless you add it to your .gitignore
+ * file.  If your repository will be publicly viewable, don't add
+ * any private information to this file!
+ *
+ */
 
 module.exports = {
-    db: 'mongodb://localhost/meancellar-dev',
-    app: {
-        name: 'a demo app for mean.io - Dev'
-    },
-    facebook: {
-        clientID: 'APP_ID',
-        clientSecret: 'APP_SECRET',
-        callbackURL: 'http://localhost:3000/auth/facebook/callback'
-    },
-    twitter: {
-        clientID: 'CONSUMER_KEY',
-        clientSecret: 'CONSUMER_SECRET',
-        callbackURL: 'http://localhost:3000/auth/twitter/callback'
-    },
-    github: {
-        clientID: 'APP_ID',
-        clientSecret: 'APP_SECRET',
-        callbackURL: 'http://localhost:3000/auth/github/callback'
-    },
-    google: {
-        clientID: 'APP_ID',
-        clientSecret: 'APP_SECRET',
-        callbackURL: 'http://localhost:3000/auth/google/callback'
-    },
-    linkedin: {
-        clientID: 'API_KEY',
-        clientSecret: 'SECRET_KEY',
-        callbackURL: 'http://localhost:3000/auth/linkedin/callback'
-    },
-    emailFrom : 'SENDER EMAIL ADDRESS', // sender address like ABC <abc@example.com>
-    mailer: {
-        service: 'SERVICE_PROVIDER',
-        auth: {
-            user: 'EMAIL_ID',
-            pass: 'PASSWORD'
-        }
-    },
-    debug:true
+
+  /***************************************************************************
+   * Set the default database connection for models in the development       *
+   * environment (see config/connections.js and config/models.js )           *
+   ***************************************************************************/
+
+  // models: {
+  //   connection: 'someMongodbServer'
+  // }
+
 };

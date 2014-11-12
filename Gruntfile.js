@@ -1,129 +1,81 @@
-'use strict';
-
-var paths = {
-    js: ['*.js', 'test/**/*.js', '!test/coverage/**', '!bower_components/**', 'packages/**/*.js', '!packages/**/node_modules/**'],
-    html: ['packages/**/public/**/views/**', 'packages/**/server/views/**'],
-    css: ['!bower_components/**', 'packages/**/public/**/css/*.css']
-};
+/**
+ * Gruntfile
+ *
+ * This Node script is executed when you run `grunt` or `sails lift`.
+ * It's purpose is to load the Grunt tasks in your project's `tasks`
+ * folder, and allow you to add and remove tasks as you see fit.
+ * For more information on how this works, check out the `README.md`
+ * file that was generated in your `tasks` folder.
+ *
+ * WARNING:
+ * Unless you know what you're doing, you shouldn't change this file.
+ * Check out the `tasks` directory instead.
+ */
 
 module.exports = function(grunt) {
 
-    if (process.env.NODE_ENV !== 'production') {
-        require('time-grunt')(grunt);
-    }
 
-    // Project Configuration
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        assets: grunt.file.readJSON('config/assets.json'),
-        clean: ['bower_components/build'],
-        watch: {
-            js: {
-                files: paths.js,
-                tasks: ['jshint'],
-                options: {
-                    livereload: true
-                }
-            },
-            html: {
-                files: paths.html,
-                options: {
-                    livereload: true,
-                    interval: 500
-                }
-            },
-            css: {
-                files: paths.css,
-                tasks: ['csslint'],
-                options: {
-                    livereload: true
-                }
-            }
-        },
-        jshint: {
-            all: {
-                src: paths.js,
-                options: {
-                    jshintrc: true
-                }
-            }
-        },
-        uglify: {
-            core: {
-                options: {
-                    mangle: false
-                },
-                files: '<%= assets.core.js %>'
-            }
-        },
-        csslint: {
-            options: {
-                csslintrc: '.csslintrc'
-            },
-            src: paths.css
-        },
-        cssmin: {
-            core: {
-                files: '<%= assets.core.css %>'
-            }
-        },
-        nodemon: {
-            dev: {
-                script: 'server.js',
-                options: {
-                    args: [],
-                    ignore: ['node_modules/**'],
-                    ext: 'js,html',
-                    nodeArgs: ['--debug'],
-                    delayTime: 1,
-                    cwd: __dirname
-                }
-            }
-        },
-        concurrent: {
-            tasks: ['nodemon', 'watch'],
-            options: {
-                logConcurrentOutput: true
-            }
-        },
-        mochaTest: {
-            options: {
-                reporter: 'spec',
-                require: [
-                    'server.js',
-                    function() {
-                        require('meanio/lib/util').preload(__dirname + '/packages/**/server', 'model');
-                    }
-                ]
-            },
-            src: ['packages/**/server/tests/**/*.js']
-        },
-        env: {
-            test: {
-                NODE_ENV: 'test'
-            }
-        },
-        karma: {
-            unit: {
-                configFile: 'karma.conf.js'
-            }
-        }
-    });
+	// Load the include-all library in order to require all of our grunt
+	// configurations and task registrations dynamically.
+	var includeAll;
+	try {
+		includeAll = require('include-all');
+	} catch (e0) {
+		try {
+			includeAll = require('sails/node_modules/include-all');
+		}
+		catch(e1) {
+			console.error('Could not find `include-all` module.');
+			console.error('Skipping grunt tasks...');
+			console.error('To fix this, please run:');
+			console.error('npm install include-all --save`');
+			console.error();
 
-    //Load NPM tasks
-    require('load-grunt-tasks')(grunt);
+			grunt.registerTask('default', []);
+			return;
+		}
+	}
 
-    //Default task(s).
-    if (process.env.NODE_ENV === 'production') {
-        grunt.registerTask('default', ['clean', 'cssmin', 'uglify', 'concurrent']);
-    } else {
-        grunt.registerTask('default', ['clean', 'jshint', 'csslint', 'concurrent']);
-    }
 
-    //Test task.
-    grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	/**
+	 * Loads Grunt configuration modules from the specified
+	 * relative path. These modules should export a function
+	 * that, when run, should either load/configure or register
+	 * a Grunt task.
+	 */
+	function loadTasks(relPath) {
+		return includeAll({
+			dirname: require('path').resolve(__dirname, relPath),
+			filter: /(.+)\.js$/
+		}) || {};
+	}
 
-    // For Heroku users only.
-    // Docs: https://github.com/linnovate/mean/wiki/Deploying-on-Heroku
-    grunt.registerTask('heroku:production', ['cssmin', 'uglify']);
+	/**
+	 * Invokes the function from a Grunt configuration module with
+	 * a single argument - the `grunt` object.
+	 */
+	function invokeConfigFn(tasks) {
+		for (var taskName in tasks) {
+			if (tasks.hasOwnProperty(taskName)) {
+				tasks[taskName](grunt);
+			}
+		}
+	}
+
+
+
+
+	// Load task functions
+	var taskConfigurations = loadTasks('./tasks/config'),
+		registerDefinitions = loadTasks('./tasks/register');
+
+	// (ensure that a default task exists)
+	if (!registerDefinitions.default) {
+		registerDefinitions.default = function (grunt) { grunt.registerTask('default', []); };
+	}
+
+	// Run task functions to configure Grunt.
+	invokeConfigFn(taskConfigurations);
+	invokeConfigFn(registerDefinitions);
+
 };

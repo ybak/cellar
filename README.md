@@ -1,1 +1,3 @@
-nodecellar remake by mean.io
+# testSails
+
+a [Sails](http://sailsjs.org) application
