@@ -34,9 +34,5 @@
   },
   "author": "anonymous node/sails user",
   "license": "",
-  "devDependencies": {
-    "nightmare": "~1.6.2",
-    "should": "~4.2.1",
-    "mocha": "~2.0.1"
-  }
+  "devDependencies": {}
 }
